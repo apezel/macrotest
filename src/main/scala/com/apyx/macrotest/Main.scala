@@ -10,9 +10,12 @@ object Main {
 	
 		println("- DONE -")
 	}
-
+	
+	
 }
 
-@AddClassWithGenerics object ToModifyByAddingClassWithGenerics { }
+class P[T] { }
+
+@AddClassWithGenerics object ToModifyByAddingClassWithGenerics extends P[Any] { }
 @AddAbstractClassToObject object ToModifiyByAddingAbstractClass { }
 @AddTraitToObject object ToModifiyByAddingTrait { }

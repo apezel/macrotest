@@ -16,6 +16,12 @@ class AddClassWithGenerics extends StaticAnnotation {
 	def macroTransform(annottees: Any*) = macro TestMacro.AddClassWithGenerics_impl //doesn't work
 }
 
+abstract class test {
+
+	def abc[U](onFulfill: Function1[Any, Any]):U
+	
+}
+
 object TestMacro {
 	def AddTraitToObject_impl(c:Context)(annottees:c.Expr[Any]*): c.Expr[Any] = {
 		import c.universe._
@@ -72,9 +78,12 @@ object TestMacro {
 			
 			val q"$mods object $name extends ..$ext { ..$body }" = moddef
 			
+			val typeDef = q"type ${TypeName("U")}"
+			
 			val oBody = (body 
-					:+ q"abstract class MyAbstract1[T] { def myDef[U](arg1:Function[T, MyAbstract1[U]]):MyAbstract1[U] }"
-					:+ q"abstract class MyAbstract2[T] { def myDef[U](arg1:Function[T, MyAbstract1[U]]):MyAbstract2[U] }")
+					:+ q"abstract class MyAbstract1[U] { def myDef[$typeDef](arg1:Function[U, MyAbstract1[U]]):MyAbstract1[U] }"
+					:+ q"abstract class MyAbstract2[U] { def myDef[$typeDef](arg1:Function[U, MyAbstract1[U]]):MyAbstract2[U] }")
+			
 	    
 			q"object $name extends ..$ext { ..$oBody }"
 		}
@@ -85,7 +94,8 @@ object TestMacro {
 			case x:Any => (EmptyTree, x)
 	    }
 	    
-	    println("[INFO] Will insert class with generics...")
+	    println("[INFO] Will insert class with generics... ")
+	    println(expandees)
 			
 		return c.Expr[Any](Block(expandees, Literal(Constant(()))))
 		
