@@ -4,12 +4,12 @@ name := "MacroTest"
 
 version := "1.0"
 
-scalaVersion := "2.11.0-M5"
+scalaVersion := "2.11.0-SNAPSHOT"
 
 mainClass := Some("com.apyx.macrotest.Main")
 
 libraryDependencies ++= Seq(
-  "org.scala-lang" % "scala-reflect" % "2.11.0-M5"
+  "org.scala-lang" % "scala-reflect" % "2.11.0-SNAPSHOT"
 )
 
 resolvers += Resolver.sonatypeRepo("snapshots")
