@@ -1,4 +1,4 @@
-scalaVersion := "2.11.0-M5"
+scalaVersion := "2.11.0-SNAPSHOT"
 
 name := "macros"
 
@@ -7,7 +7,7 @@ version := "1.0"
 organization := "com.apyx"
 
 libraryDependencies ++= Seq(
-  "org.scala-lang" % "scala-reflect" % "2.11.0-M5"
+  "org.scala-lang" % "scala-reflect" % "2.11.0-SNAPSHOT"
 )
 
 resolvers += Resolver.sonatypeRepo("snapshots")
